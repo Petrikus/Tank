@@ -78,27 +78,36 @@ public class Game implements Runnable{
 
         if (input.getKey(KeyEvent.VK_D))
         {
-           x += speed;
+            if (x < 770)
+            {
+                x += speed;
+            }
             sheet = new SpriteSheet(imageAtlass.cut(6*16, 0*16, 32, 16), 2, 16);
             sprite = new Sprite(sheet, 2);
         }
         if (input.getKey(KeyEvent.VK_S))
         {
-            k = k + speed;
+            if (k < 610) {
+                k = k + speed;
+            }
             sheet = new SpriteSheet(imageAtlass.cut(4*16, 0*16, 32, 16), 2, 16);
             sprite = new Sprite(sheet, 2);
 
         }
         if (input.getKey(KeyEvent.VK_A))
         {
-            x -= speed;
+            if (x > 0) {
+                x -= speed;
+            }
             sheet = new SpriteSheet(imageAtlass.cut(2*16, 0*16, 32, 16), 2, 16);
             sprite = new Sprite(sheet, 2);
 
         }
         if (input.getKey(KeyEvent.VK_W))
         {
-            k -= speed;
+            if (k > 0) {
+                k -= speed;
+            }
             sheet = new SpriteSheet(imageAtlass.cut(0*16, 0*16, 32, 16), 2, 16);
             sprite = new Sprite(sheet, 2);
 
