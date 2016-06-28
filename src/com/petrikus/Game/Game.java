@@ -29,12 +29,8 @@ public class Game implements Runnable{
     private Graphics2D graphics2D;
     private Input input;
     private Texture_Atlass imageAtlass;
-    private SpriteSheet sheet;
-    private Sprite sprite;
-    float x = 350;
-    float k = 250;
-    int zet = 0;
-    float speed = 4;
+   private  Player player;
+
     public Game(){
         running = false;
         Display.create(WIDTH,HEIGHT,TITLE,CLEAR_COLOR,NUM_BUFFER);
@@ -42,8 +38,8 @@ public class Game implements Runnable{
         input = new Input();
         Display.addInput(input);
         imageAtlass = new Texture_Atlass(ATLAS_FILE_NAME);
-        sheet = new SpriteSheet(imageAtlass.cut(0*16, 0*16, 32, 16), 2, 16);
-        sprite = new Sprite(sheet, 2);
+        player = new Player(300, 300, 2, 5, imageAtlass);
+
     }
 
     public synchronized void Start(){
@@ -75,49 +71,14 @@ public class Game implements Runnable{
     }
 
     private void Update(){
+        player.update(input);
 
-        if (input.getKey(KeyEvent.VK_D))
-        {
-            if (x < 770)
-            {
-                x += speed;
-            }
-            sheet = new SpriteSheet(imageAtlass.cut(6*16, 0*16, 32, 16), 2, 16);
-            sprite = new Sprite(sheet, 2);
-        }
-        if (input.getKey(KeyEvent.VK_S))
-        {
-            if (k < 610) {
-                k = k + speed;
-            }
-            sheet = new SpriteSheet(imageAtlass.cut(4*16, 0*16, 32, 16), 2, 16);
-            sprite = new Sprite(sheet, 2);
-
-        }
-        if (input.getKey(KeyEvent.VK_A))
-        {
-            if (x > 0) {
-                x -= speed;
-            }
-            sheet = new SpriteSheet(imageAtlass.cut(2*16, 0*16, 32, 16), 2, 16);
-            sprite = new Sprite(sheet, 2);
-
-        }
-        if (input.getKey(KeyEvent.VK_W))
-        {
-            if (k > 0) {
-                k -= speed;
-            }
-            sheet = new SpriteSheet(imageAtlass.cut(0*16, 0*16, 32, 16), 2, 16);
-            sprite = new Sprite(sheet, 2);
-
-        }
 
     }
 
     private void Render(){
         Display.clear();
-        sprite.render(graphics2D, x, k);
+        player.render(graphics2D);
         Display.swapBuffers();
     }
 
